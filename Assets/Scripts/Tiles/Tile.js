@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+var slot 				: GameObject;
+
 var spawnedFrom 		: GameObject;
 var textObject 			: GameObject;
 
@@ -25,10 +27,17 @@ function TilePickedup(){
 	if(moveCount == 0){
 		spawnedFrom.SendMessage("SpawnTile");
 	}
+
+	if(slot){
+		slot.SendMessage("TileRemoved");
+	}
+
 	moveCount++;
 }
 
 function TileDropped(droppedSlot : GameObject){
+	slot = droppedSlot;
+
 	spriteRenderer.sortingLayerName = inactiveLayerName;
 	textRenderer.sortingLayerName 	= inactiveLayerName;
 }
