@@ -46,7 +46,8 @@ function Update () {
 				if(hitObject.tag == "TileSlot"){
 					DropTile(tileToDrag, hitObject);					
 				} else if(hitObject.tag == "GameTable"){
-					// kill the current tile
+					Destroy(tileToDrag);
+					//spawn drop effect at somepoint
 				}
 			}
 		}

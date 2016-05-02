@@ -1,6 +1,12 @@
 ﻿#pragma strict
 
+var tracker 		: GameObject;
 var tileOnSlot 		: GameObject;
+
+
+function SetTracker(theTracker : GameObject){
+	tracker = theTracker;
+}
 
 function TileDropped(droppedTile : GameObject){
 	if(tileOnSlot && tileOnSlot != droppedTile){
