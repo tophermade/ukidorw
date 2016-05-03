@@ -15,6 +15,8 @@ var activeLayerName 	: String 		= "TilesActive";
 
 var moveCount 			: int 			= 0;
 
+
+
 function SetSpawner(spawnParent : GameObject){
 	spawnedFrom = spawnParent;
 }
@@ -35,12 +37,14 @@ function TilePickedup(){
 	moveCount++;
 }
 
+
 function TileDropped(droppedSlot : GameObject){
 	slot = droppedSlot;
 
 	spriteRenderer.sortingLayerName = inactiveLayerName;
 	textRenderer.sortingLayerName 	= inactiveLayerName;
 }
+
 
 function Awake(){
 	tileLetter += alphabet[Random.Range(0,alphabet.length)];
@@ -57,6 +61,7 @@ function Awake(){
 function Start () {
 
 }
+
 
 function Update () {
 	// var v3 = Input.mousePosition;

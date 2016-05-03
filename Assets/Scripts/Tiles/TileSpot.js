@@ -3,6 +3,8 @@
 var trackers 		= new GameObject[2];
 var tileOnSlot 		: GameObject;
 
+var tileLetter 		: String;
+
 
 function TileRemoved(){
 	tileOnSlot = null;
@@ -18,10 +20,15 @@ function SetTracker(theTracker : GameObject){
 	print(trackers);
 }
 
+
 function TileDropped(droppedTile : GameObject){
 	if(tileOnSlot && tileOnSlot != droppedTile){
 		Destroy(tileOnSlot);
 	}
+
+	tileOnSlot = droppedTile;
+
+	tileLetter = droppedTile.transform.Find("Text").GetComponent(TextMesh).text;
 
 	if(trackers[0]){
 		trackers[0].SendMessage("AddTile", tileOnSlot);
@@ -30,7 +37,6 @@ function TileDropped(droppedTile : GameObject){
 		trackers[1].SendMessage("AddTile", tileOnSlot);
 	}
 
-	tileOnSlot = droppedTile;
 	tileOnSlot.transform.position.x = transform.position.x;
 	tileOnSlot.transform.position.y = transform.position.y;
 }
