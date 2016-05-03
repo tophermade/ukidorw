@@ -34,6 +34,7 @@ function WordIsValid(){
 			var ipx = trackedSlots[i+1].transform.position.x - .6;
 			var ipy = trackedSlots[i].transform.position.y - .6;
 			var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
+				newIndicator.transform.parent = indicatorParent.transform;
 
 			if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
 				newIndicator.transform.position.x = ipx;
