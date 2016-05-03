@@ -23,6 +23,7 @@ function SetSpawner(spawnParent : GameObject){
 
 
 function TilePickedup(){
+	print("TilePickedup");
 	spriteRenderer.sortingLayerName = activeLayerName;
 	textRenderer.sortingLayerName 	= activeLayerName;
 
@@ -50,7 +51,7 @@ function Awake(){
 	tileLetter += alphabet[Random.Range(0,alphabet.length)];
 	textObject.GetComponent(TextMesh).text = tileLetter;
 	
-	spriteRenderer = GetComponent(SpriteRenderer);
+	spriteRenderer = transform.Find("Sprite").GetComponent(SpriteRenderer);
 	textRenderer = textObject.GetComponent(MeshRenderer);
 
 	spriteRenderer.sortingLayerName = inactiveLayerName;
