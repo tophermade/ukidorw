@@ -7,8 +7,14 @@ var tileLetter 		: String;
 
 
 function TileRemoved(){
-	//tileOnSlot = null;
 	tileLetter = "9";
+
+	// if we change the tile value the first of two, it breaks the tile lookup effect,
+	// so when there are two trackers we only change it via the second
+	if(trackers[0] && trackers[1]){		
+		trackers[0].SendMessage("RemoveTile");
+		trackers[1].SendMessage("RemoveTile", gameObject);
+	}
 
 	if(trackers[0]){
 		trackers[0].SendMessage("RemoveTile", gameObject);

@@ -40,6 +40,12 @@ function AddTile(){
 }
 
 
+function RemoveTile(){
+	word = "";
+	WordIsNotValid();	
+}
+
+
 function RemoveTile(tileBeingRemoved : GameObject){
 	word = "";
 	WordIsNotValid();
