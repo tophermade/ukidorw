@@ -7,8 +7,18 @@ var indicatorParent 	: GameObject;
 var indicator 			: GameObject;
 
 var word 				: String;
+var colorRed 			: Color;
+var colorBlue 			: Color;
 
 var wordIsCorrect 		: boolean 		= false;
+
+
+function HexToColor(hex : String){
+    var r = byte.Parse(hex.Substring(0,2), System.Globalization.NumberStyles.HexNumber);
+    var g = byte.Parse(hex.Substring(2,2), System.Globalization.NumberStyles.HexNumber);
+    var b = byte.Parse(hex.Substring(4,2), System.Globalization.NumberStyles.HexNumber);
+    return new Color32(r,g,b, 255);
+}
 
 
 function Hide(){
@@ -30,33 +40,39 @@ function AddTile(){
 }
 
 
-function RemoveTile(){
+function RemoveTile(tileBeingRemoved : GameObject){
 	word = "";
-	wordIsCorrect = false;
+	WordIsNotValid();
+	tileBeingRemoved.GetComponent(TileSpot).tileOnSlot = null;
 }
 
 
 function WordIsValid(){
 	print("Word Is Valid");
-	var delay : float = .25;
+	var delay : float = .15;
+	// individual pops
 	for (var i = 0; i < trackedSlots.length; i++) {
 		yield WaitForSeconds(delay);
 		trackedSlots[i].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
 		
-		// var ipx = trackedSlots[i+1].transform.position.x - .6;
-		// var ipy = trackedSlots[i].transform.position.y - .6;
-		// var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
-		// 	newIndicator.transform.parent = indicatorParent.transform;
+		if(i < trackedSlots.length-1){
+			var ipx = trackedSlots[i+1].transform.position.x - .5;
+			var ipy = trackedSlots[i].transform.position.y - .5;
+			var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
+				newIndicator.transform.parent = indicatorParent.transform;
 
-		// if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
-		// 	newIndicator.transform.position.x = ipx;
-		// } else {
-		// 	newIndicator.transform.position.y = ipy;
-		// }
-
-		// if(i < trackedSlots.length-1){
-			
-		// }
+			if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
+				newIndicator.transform.position.x = ipx;
+			} else {
+				newIndicator.transform.position.y = ipy;
+			}
+		}
+	}
+	// all pop at once
+	yield WaitForSeconds(.25);
+	for (var i2 = 0; i2 < trackedSlots.length; i2++) {
+		trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
+		trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.transform.Find("Text").GetComponent(TextMesh).color = colorRed;
 	}
 	wordIsCorrect = true;
 }
@@ -64,6 +80,15 @@ function WordIsValid(){
 
 function WordIsNotValid(){
 	print("Word Is NOT Valid");
+	if(wordIsCorrect){
+		for (var i2 = 0; i2 < trackedSlots.length; i2++) {
+			trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.transform.Find("Text").GetComponent(TextMesh).color = colorBlue;
+		}
+		
+		for(var child : Transform in indicatorParent.transform){
+			Destroy(child.gameObject);
+		}
+	}
 	wordIsCorrect = false;
 }
 
@@ -76,7 +101,10 @@ function Awake(){
 		trackedLetters.Push("-");
 	}
 
-	indicator = Resources.Load("Connector");
+	indicator 	= Resources.Load("Connector");
+
+	colorRed 	= HexToColor("EB4747");
+	colorBlue 	= HexToColor("7BAAF7");
 }
 
 
