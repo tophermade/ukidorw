@@ -49,32 +49,37 @@ function RemoveTile(tileBeingRemoved : GameObject){
 
 function WordIsValid(){
 	print("Word Is Valid");
+	wordIsCorrect = true;
+
 	var delay : float = .15;
+
 	// individual pops
 	for (var i = 0; i < trackedSlots.length; i++) {
 		yield WaitForSeconds(delay);
-		trackedSlots[i].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
-		
-		if(i < trackedSlots.length-1){
-			var ipx = trackedSlots[i+1].transform.position.x - .5;
-			var ipy = trackedSlots[i].transform.position.y - .5;
-			var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
-				newIndicator.transform.parent = indicatorParent.transform;
-
-			if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
-				newIndicator.transform.position.x = ipx;
-			} else {
-				newIndicator.transform.position.y = ipy;
-			}
-		}
+		trackedSlots[i].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");		
 	}
+
 	// all pop at once
 	yield WaitForSeconds(.25);
 	for (var i2 = 0; i2 < trackedSlots.length; i2++) {
 		trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
 		trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.transform.Find("Text").GetComponent(TextMesh).color = colorRed;
 	}
-	wordIsCorrect = true;
+
+	yield WaitForSeconds(.1);
+	for (var i3 = 0; i3 < trackedSlots.length; i3++) {if(i3 < trackedSlots.length-1){
+			var ipx = trackedSlots[i3+1].transform.position.x - .5;
+			var ipy = trackedSlots[i3].transform.position.y - .5;
+			var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
+				newIndicator.transform.parent = indicatorParent.transform;
+
+			if(trackedSlots[i3].transform.position.x < trackedSlots[i3+1].transform.position.x){
+				newIndicator.transform.position.x = ipx;
+			} else {
+				newIndicator.transform.position.y = ipy;
+			}
+		}
+	}
 }
 
 
@@ -84,7 +89,7 @@ function WordIsNotValid(){
 		for (var i2 = 0; i2 < trackedSlots.length; i2++) {
 			trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.transform.Find("Text").GetComponent(TextMesh).color = colorBlue;
 		}
-		
+
 		for(var child : Transform in indicatorParent.transform){
 			Destroy(child.gameObject);
 		}
