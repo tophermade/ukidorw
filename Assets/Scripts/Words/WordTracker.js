@@ -21,30 +21,34 @@ function AddTile(){
 	for (var i = 0; i < trackedSlots.length; i++) {
 		word = word + trackedSlots[i].GetComponent(TileSpot).tileLetter;
 	}
-
-	BroadcastMessage("CheckWord", word);
+	if(trackedSlots.length == word.length){
+		BroadcastMessage("CheckWord", word);
+	}
+	
 }
 
 
 function WordIsValid(){
 	print("Word Is Valid");
-	var delay : float = .01;
+	var delay : float = .25;
 	for (var i = 0; i < trackedSlots.length; i++) {
 		yield WaitForSeconds(delay);
 		trackedSlots[i].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
-		if(i < trackedSlots.length-1){
-			var ipx = trackedSlots[i+1].transform.position.x - .6;
-			var ipy = trackedSlots[i].transform.position.y - .6;
-			var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
-				newIndicator.transform.parent = indicatorParent.transform;
+		
+		// var ipx = trackedSlots[i+1].transform.position.x - .6;
+		// var ipy = trackedSlots[i].transform.position.y - .6;
+		// var newIndicator = Instantiate(indicator, transform.position, Quaternion.identity);
+		// 	newIndicator.transform.parent = indicatorParent.transform;
 
-			if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
-				newIndicator.transform.position.x = ipx;
-			} else {
-				newIndicator.transform.position.y = ipy;
-			}
-		}
-		delay = delay + .75;
+		// if(trackedSlots[i].transform.position.x < trackedSlots[i+1].transform.position.x){
+		// 	newIndicator.transform.position.x = ipx;
+		// } else {
+		// 	newIndicator.transform.position.y = ipy;
+		// }
+
+		// if(i < trackedSlots.length-1){
+			
+		// }
 	}
 }
 

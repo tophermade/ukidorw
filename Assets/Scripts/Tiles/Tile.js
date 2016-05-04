@@ -23,7 +23,7 @@ function SetSpawner(spawnParent : GameObject){
 
 
 function TilePickedup(){
-	print("TilePickedup");
+	//print("TilePickedup");
 	spriteRenderer.sortingLayerName = activeLayerName;
 	textRenderer.sortingLayerName 	= activeLayerName;
 

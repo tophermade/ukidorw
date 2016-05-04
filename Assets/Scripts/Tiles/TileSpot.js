@@ -17,7 +17,7 @@ function SetTracker(theTracker : GameObject){
 	} else {
 		trackers[1] = theTracker;
 	}
-	print(trackers);
+	//print(trackers);
 }
 
 

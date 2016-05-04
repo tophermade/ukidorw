@@ -4,13 +4,13 @@ import System.Linq;
 var myDictionary 	: Dictionary.<String, String>;
 
 function CheckWord(word : String) {
-	print(Time.time);
+	//print(Time.time);
 	if(myDictionary.ContainsKey(word)){
 		BroadcastMessage("WordIsValid");
 	} else if(!myDictionary.ContainsKey(word)){
 		BroadcastMessage("WordIsNotValid");
 	}    
-	print(Time.time);
+	//print(Time.time);
 }
 
 function Awake(){
