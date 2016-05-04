@@ -28,8 +28,10 @@ function AddTile(){
 
 function WordIsValid(){
 	print("Word Is Valid");
-
+	var delay : float = .01;
 	for (var i = 0; i < trackedSlots.length; i++) {
+		yield WaitForSeconds(delay);
+		trackedSlots[i].GetComponent(TileSpot).tileOnSlot.GetComponent(Animator).SetTrigger("PlayPop");
 		if(i < trackedSlots.length-1){
 			var ipx = trackedSlots[i+1].transform.position.x - .6;
 			var ipy = trackedSlots[i].transform.position.y - .6;
@@ -42,6 +44,7 @@ function WordIsValid(){
 				newIndicator.transform.position.y = ipy;
 			}
 		}
+		delay = delay + .75;
 	}
 }
 
