@@ -8,6 +8,14 @@ var tileLetter 		: String;
 
 function TileRemoved(){
 	tileOnSlot = null;
+	tileLetter = "9";
+
+	if(trackers[0]){
+		trackers[0].SendMessage("RemoveTile");
+	}
+	if(trackers[1]){
+		trackers[1].SendMessage("RemoveTile");
+	}
 }
 
 

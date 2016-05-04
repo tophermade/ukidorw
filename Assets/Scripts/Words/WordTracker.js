@@ -8,6 +8,8 @@ var indicator 			: GameObject;
 
 var word 				: String;
 
+var wordIsCorrect 		: boolean 		= false;
+
 
 function Hide(){
 	GetComponent(SpriteRenderer).enabled = false;
@@ -25,6 +27,12 @@ function AddTile(){
 		BroadcastMessage("CheckWord", word);
 	}
 	
+}
+
+
+function RemoveTile(){
+	word = "";
+	wordIsCorrect = false;
 }
 
 
@@ -50,11 +58,13 @@ function WordIsValid(){
 			
 		// }
 	}
+	wordIsCorrect = true;
 }
 
 
 function WordIsNotValid(){
 	print("Word Is NOT Valid");
+	wordIsCorrect = false;
 }
 
 
