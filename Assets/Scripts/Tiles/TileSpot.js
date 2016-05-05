@@ -39,7 +39,7 @@ function TileRemoved(){
 
 
 function TileDropped(droppedTile : GameObject){
-	print(gameObject);
+	//print(gameObject);
 	if(tileOnSlot && tileOnSlot != droppedTile){
 		Destroy(tileOnSlot);
 	}
