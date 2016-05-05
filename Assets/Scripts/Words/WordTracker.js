@@ -54,7 +54,7 @@ function RemoveTile(tileBeingRemoved : GameObject){
 
 
 function WordIsValid(){
-	print("Word Is Valid");
+	//print("Word Is Valid");
 	wordIsCorrect = true;
 
 	var delay : float = .15;
@@ -90,7 +90,7 @@ function WordIsValid(){
 
 
 function WordIsNotValid(){
-	print("Word Is NOT Valid");
+	//print("Word Is NOT Valid");
 	if(wordIsCorrect){
 		for (var i2 = 0; i2 < trackedSlots.length; i2++) {
 			trackedSlots[i2].GetComponent(TileSpot).tileOnSlot.transform.Find("Text").GetComponent(TextMesh).color = colorBlue;

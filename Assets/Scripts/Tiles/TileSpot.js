@@ -6,7 +6,18 @@ var tileOnSlot 		: GameObject;
 var tileLetter 		: String;
 
 
+function SetTracker(theTracker : GameObject){
+	if(!trackers[0]){
+		trackers[0] = theTracker;
+	} else {
+		trackers[1] = theTracker;
+	}
+	//print(trackers);
+}
+
+
 function TileRemoved(){
+	// set to 9 in order to make a valid word impossible when the spot is "empty"
 	tileLetter = "9";
 
 	// if we change the tile value the first of two, it breaks the tile lookup effect,
@@ -22,20 +33,13 @@ function TileRemoved(){
 	if(trackers[1]){
 		trackers[1].SendMessage("RemoveTile", gameObject);
 	}
-}
 
-
-function SetTracker(theTracker : GameObject){
-	if(!trackers[0]){
-		trackers[0] = theTracker;
-	} else {
-		trackers[1] = theTracker;
-	}
-	//print(trackers);
+	tileOnSlot = null;
 }
 
 
 function TileDropped(droppedTile : GameObject){
+	print(gameObject);
 	if(tileOnSlot && tileOnSlot != droppedTile){
 		Destroy(tileOnSlot);
 	}
