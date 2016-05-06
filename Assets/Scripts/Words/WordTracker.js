@@ -3,7 +3,9 @@
 var trackedSlots 		: GameObject[];
 var trackedLetters 		= new Array();
 
-var indicatorParent 	: GameObject;
+var boardManager 		: GameObject;
+
+var indicatorParent 	: GameObject; // newly created indicators are children of this
 var indicator 			: GameObject;
 
 var word 				: String;
@@ -24,6 +26,11 @@ function HexToColor(hex : String){
 function Hide(){
 	GetComponent(SpriteRenderer).enabled = false;
 	transform.Find("Arrow").GetComponent(SpriteRenderer).enabled = false;
+}
+
+
+function SetManager(theManager : GameObject){
+	boardManager = theManager;
 }
 
 
@@ -86,6 +93,8 @@ function WordIsValid(){
 			}
 		}
 	}
+
+	boardManager.SendMessage("CheckBoard");
 }
 
 
