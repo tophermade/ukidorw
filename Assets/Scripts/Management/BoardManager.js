@@ -2,6 +2,7 @@
 
 
 var managerText 		: GameObject;
+var gameManager 		: GameObject;
 var trackers 			: GameObject[];
 
 
@@ -16,13 +17,15 @@ function CheckBoard(){
 
 	if(correct){
 		print("Board Is Complete");
+		gameManager.SendMessage("EndRound", true);
 	}
 
 }
 
 
 function Awake(){
-	trackers = GameObject.FindGameObjectsWithTag("Tracker");
+	trackers 		= GameObject.FindGameObjectsWithTag("Tracker");
+	gameManager 	= GameObject.Find("GameManager");
 
 	for (var i = 0; i < trackers.length; i++) {
 		trackers[i].SendMessage("SetManager", gameObject);
