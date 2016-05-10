@@ -6,6 +6,12 @@ var score 			: int 			= 0;
 
 
 function SetScore(amount : int){
+	score = amount;
+	scoreText.GetComponent(TextMesh).text = score.ToString();
+}
+
+
+function AddScore(amount : int){
 	score = score + amount;
 	scoreText.GetComponent(TextMesh).text = score.ToString();
 }
@@ -13,5 +19,5 @@ function SetScore(amount : int){
 
 function Awake(){
 	scoreText = transform.Find("Text").gameObject;
-	SetScore(0);
+	AddScore(0);
 }

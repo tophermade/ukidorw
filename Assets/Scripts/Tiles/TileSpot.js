@@ -59,8 +59,13 @@ function TileDropped(droppedTile : GameObject){
 	tileOnSlot.transform.position.y = transform.position.y;
 }
 
+function StartRound(){
+	transform.Find("Sprite").gameObject.GetComponent(Animator).enabled = true;
+}
+
 
 function Awake(){
+	gameObject.GetComponent(SpriteRenderer).enabled = false;
 
 }
 
