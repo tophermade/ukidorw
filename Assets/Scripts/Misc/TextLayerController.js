@@ -7,7 +7,7 @@ function Awake(){
 }
 
 function Start () {
-	print(gameObject.GetComponent(MeshRenderer).sortingOrder);
+	//print(gameObject.GetComponent(MeshRenderer).sortingOrder);
 	tl = transform.parent.gameObject.GetComponent(SpriteRenderer).sortingLayerName;
 	gameObject.GetComponent(MeshRenderer).sortingLayerName = tl;
 

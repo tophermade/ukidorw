@@ -29,6 +29,8 @@ function Update () {
 			if(tag == "Tile"){
 				tileToDrag = hit.transform.gameObject;
 				tileToDrag.SendMessage("TilePickedup");
+			} else if(tag == "Button"){
+				hit.transform.gameObject.SendMessage("Click");
 			}
 		}
 	}
