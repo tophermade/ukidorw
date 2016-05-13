@@ -1,28 +1,44 @@
 ﻿#pragma strict
 
 
-var stars 		: GameObject[];
-var text	 	: GameObject;
-var sprite 		: GameObject;
+var stars 			: GameObject[];
+var text	 		: GameObject;
+var sprite 			: GameObject;
+var transitioner	: GameObject;
 
-var isUnlocked 	: boolean 		= false;
-var isComplete 	: boolean 		= false;
-var forceUnlock : boolean 		= false;
+var isUnlocked 		: boolean 		= false;
+var isComplete 		: boolean 		= false;
+var forceUnlock 	: boolean 		= false;
 
-var title 		: String;
+var title 			: String;
 
-var red 		: String 		= "E94747";
-var blue 		: String 		= "7BAAF7";
-var emptyStar 	: String 		= "F8BBC1";
+var red 			: String 		= "E94747";
+var blue 			: String 		= "7BAAF7";
+var emptyStar 		: String 		= "F8BBC1";
+
+
+function PlayTapAnimation(){
+	sprite.GetComponent(Animator).SetTrigger("Play");
+}
+
+
+function PlayErrorAnimation(){
+	sprite.GetComponent(Animator).SetTrigger("Error");
+}
 
 
 function TileIsUnlocked(){
 	print("tile available for play");
+	PlayTapAnimation();
+	var newEffect = Instantiate(transitioner, Vector3(0,0,0), Quaternion.identity);	
+	yield WaitForSeconds(2);
+	Application.LoadLevel(title);
 }
 
 
 function TileIsLocked(){
 	print("tile is locked");
+	PlayErrorAnimation();
 }
 
 
