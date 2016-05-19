@@ -17,6 +17,7 @@ var blue 			: String 		= "7BAAF7";
 var emptyStar 		: String 		= "F8BBC1";
 
 
+
 function PlayTapAnimation(){
 	sprite.GetComponent(Animator).SetTrigger("Play");
 }
